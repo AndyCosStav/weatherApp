@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "LondonsWeather";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Today's Weather </h2>
+
+<p id="location"></p>
+<p id="summary"></p>
+<p id="temp"></p>
+<p id="humidity"></p>
+
+
+
+
+<script>
+
+    $(document).ready(function() {
+
+        $.get("@Url.Action("GetLondonsWeather", "Weather")",
+            function(response) {
+
+                console.log(response);
+
+                console.log(response.timezone);
+                console.log(response.currently.summary);
+                console.log(response.currently.temperature);
+                console.log(response.currently.humidity);
+
+
+                $("#location").text("Location: " + response.timezone);
+                $("#temp").text("Temperature: " + response.currently.temperature);
+                $("#summary").text("Summary: " + response.currently.summary);
+                $("#humidity").text("Humidity: " + response.currently.humidity);
+
+            });
+
+    });
+
+
+
+
+</script>
+
